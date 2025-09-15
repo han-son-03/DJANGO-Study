@@ -8,7 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-            <h1>{{ baseball.team }}</h1>
-            <p>지역: {{ baseball.local }}</p>
+    {% for num in range %}
+        <h1>
+            <a href="book_list/{{ num }}/">book{{ num }}</a>
+        </h1>
+    {% endfor %}
+
 </body>
 </html>

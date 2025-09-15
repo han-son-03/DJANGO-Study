@@ -32,21 +32,22 @@ def index(request):
     return HttpResponse('<h1>Hello</h1>')
 
 def book_list(request):
-    book_text = ''
-
-    for i in range(0, 10):
-        book_text += f'book {i}<br>'
-    return HttpResponse(book_text)
+    # book_text = ''
+    #
+    # for i in range(0, 10):
+    #     book_text += f'book {i}<br>'
+    return render(request, 'book_list.html', {'range': range(0, 10)})
 
 def book(request, num):
-    book_text = f'book {num}번 페이지 입니다.'
-    return HttpResponse(book_text)
+    # book_text = f'book {num}번 페이지 입니다.'
+
+    return render(request, 'book.html', {'num': num})
 
 def language(request, lang):
-    return HttpResponse(f'<h1>{lang} 언어 페이지입니다.</h1>')
-
+    return render(request, 'language.html', {'lang': lang})
 def python(request):
-    return HttpResponse('python 페이지 입니다.')
+    # return HttpResponse('python 페이지 입니다.')
+    return render(request, 'python.html')
 
 def baseball_team(request):
     # team_ranks = [
@@ -63,10 +64,9 @@ def team_local(request, index):
     if index > len(baseball_lists) - 1:
         raise Http404
 
-    baseball = baseball_lists[index]
-
-    response_text = f'<h1>{baseball["team"]}</h1> <p>지역: {baseball["local"]}</p>'
-    return HttpResponse(response_text)
+    # baseball = baseball_lists[index]
+    context = {'baseball_lists': baseball_lists}
+    return render(request, 'baseball.html', context)
 
 
 
@@ -76,7 +76,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
     path('book_list', book_list),
-    path('book_list/<int:num>', book),
+    path('book_list/<int:num>/', book),
     path('language/python', python),
     path('language/<str:lang>/', language),
     path('baseball/', baseball_team),
