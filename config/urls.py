@@ -56,7 +56,7 @@ def baseball_team(request):
     # response_text = '<br>'.join(team_ranks)
     #
     # return HttpResponse(response_text)
-    return render(request, 'baseball.html', {'baseball_lists': baseball_lists})
+    return render(request, 'baseballs.html', {'baseball_lists': baseball_lists})
 
 
 def team_local(request, index):
