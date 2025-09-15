@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse, Http404
+from django.shortcuts import render
 from django.urls import path
 
 baseball_lists = [
@@ -48,13 +49,15 @@ def python(request):
     return HttpResponse('python 페이지 입니다.')
 
 def baseball_team(request):
-    team_ranks = [
-        f'<a href="/baseball/{index}">{baseball['team']}</a><br>'
-        for index, baseball in enumerate(baseball_lists)
-    ]
-    response_text = '<br>'.join(team_ranks)
+    # team_ranks = [
+    #     f'<a href="/baseball/{index}">{baseball['team']}</a><br>'
+    #     for index, baseball in enumerate(baseball_lists)
+    # ]
+    # response_text = '<br>'.join(team_ranks)
+    #
+    # return HttpResponse(response_text)
+    return render(request, 'baseball.html', {'baseball_lists': baseball_lists})
 
-    return HttpResponse(response_text)
 
 def team_local(request, index):
     if index > len(baseball_lists) - 1:
