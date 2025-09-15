@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import path
 
 baseball_lists = [
@@ -68,6 +68,15 @@ def team_local(request, index):
     context = {'baseball_lists': baseball_lists}
     return render(request, 'baseball.html', context)
 
+def gugu(request, num):
+    if num < 2 :
+        return redirect('/gugu/2/')
+    context = {
+        'num': num,
+        'results' : [num * i for i in range(1, 10)]
+    }
+    return render(request, 'gugu.html', context)
+
 
 
 
@@ -81,5 +90,6 @@ urlpatterns = [
     path('language/<str:lang>/', language),
     path('baseball/', baseball_team),
     path('baseball/<int:index>', team_local),
+    path('gugu/<int:num>/', gugu),
 
 ]
