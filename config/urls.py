@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import path
+from bookmark import views
 
 baseball_lists = [
     {'team': '한화 이글스', 'local' : '대전광역시'},
@@ -83,13 +84,14 @@ def gugu(request, num):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    path('book_list', book_list),
-    path('book_list/<int:num>/', book),
-    path('language/python', python),
-    path('language/<str:lang>/', language),
-    path('baseball/', baseball_team),
-    path('baseball/<int:index>', team_local),
-    path('gugu/<int:num>/', gugu),
-
+    # path('',index),
+    # path('book_list', book_list),
+    # path('book_list/<int:num>/', book),
+    # path('language/python', python),
+    # path('language/<str:lang>/', language),
+    # path('baseball/', baseball_team),
+    # path('baseball/<int:index>', team_local),
+    # path('gugu/<int:num>/', gugu),
+    path('bookmark/', views.bookmark_list),
+    path('bookmark/<int:number>/', views.bookmark_detail),
 ]
