@@ -93,5 +93,5 @@ urlpatterns = [
     # path('baseball/<int:index>', team_local),
     # path('gugu/<int:num>/', gugu),
     path('bookmark/', views.bookmark_list),
-    path('bookmark/<int:number>/', views.bookmark_detail),
+    path('bookmark/<int:pk>/', views.bookmark_detail),
 ]

@@ -1,10 +1,24 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
+
+from bookmark.models import Bookmark
+
 
 # Create your views here.
 
 def bookmark_list(request):
-    return render(request, 'bookmark_list.html')
+    bookmarks = Bookmark.objects.all()
 
-def bookmark_detail(request, number):
-    return render(request, 'bookmark_detail.html', {'number': number})
+    context = {
+        'bookmarks': bookmarks
+    }
+    return render(request, 'bookmark_list.html', context)
+
+def bookmark_detail(request, pk):
+    try:
+        bookmark = Bookmark.objects.get(pk=pk)
+    except:
+        raise Http404
+
+    context = {'bookmark' : bookmark}
+    return render(request, 'bookmark_detail.html', context)
