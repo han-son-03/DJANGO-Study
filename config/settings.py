@@ -41,11 +41,11 @@ DJANGO_APPS = [
 own_apps = [
     'bookmark',
 ]
-THIRD_APPS = [
-
+THIRD_PARTY_APPS = [
+    'django_extensions'
 ]
 
-INSTALLED_APPS = DJANGO_APPS + own_apps + THIRD_APPS
+INSTALLED_APPS = DJANGO_APPS + own_apps + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
