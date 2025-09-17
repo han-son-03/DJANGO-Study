@@ -7,7 +7,7 @@ from bookmark.models import Bookmark
 # Create your views here.
 
 def bookmark_list(request):
-    bookmarks = Bookmark.objects.all()
+    bookmarks = Bookmark.objects.filter(id__gte=50)
 
     context = {
         'bookmarks': bookmarks

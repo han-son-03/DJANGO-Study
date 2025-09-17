@@ -9,7 +9,7 @@
 {% for bookmark in bookmarks %}
     <p>
         <a href="/bookmark/{{ bookmark.id }}/">
-        {{ bookmark.name }}
+        {{ bookmark.name }} / id: ({{ bookmark.id }})
         </a>
     </p>
 {% endfor %}
