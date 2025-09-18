@@ -10,14 +10,17 @@ def signup(request):
     # print('username', username)
     # print('password1', password1)
     # print('password2', password2)
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/accounts/login/')
-    else:
-        form = UserCreationForm()
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/accounts/login/')
+    #기존 버전의 코드
+    #     form = UserCreationForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('/accounts/login/')
+    # else:
+    #     form = UserCreationForm()
 
     context = {
         'form': form
