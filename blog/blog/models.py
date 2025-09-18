@@ -1,6 +1,6 @@
 from django.db import models
 
-class blog(models.Model):
+class Blog(models.Model):
     CATEGORY_CHOICES = (
     ('free', '자유'),
     ('travel', '여행'),
@@ -15,6 +15,12 @@ class blog(models.Model):
     created_at = models.DateTimeField('작성일자', auto_now_add=True)
     updated_at = models.DateTimeField('수정일자', auto_now=True)
 
+    def __str__(self):
+        return f'[{self.get_category_display()}] {self.title[:10]}'
+
+    class Meta:
+        verbose_name = '블로그'
+        verbose_name_plural = '블로그 목록'
 
 # 제목 ✅
 # 본문 ✅
