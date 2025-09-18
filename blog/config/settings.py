@@ -38,7 +38,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-ad
+
 own_apps = [
     'blog',
 ]
