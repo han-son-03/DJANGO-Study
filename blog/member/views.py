@@ -31,7 +31,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def login(request):
-    form = AuthenticationForm(request, request.post or None)
+    form = AuthenticationForm(request, request.POST or None)
 
     if form.is_valid():
         django_login(request, form.get_user())
