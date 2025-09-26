@@ -39,24 +39,14 @@ class TestView(View):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #FBV blog
-    # path('', views.blog_list, name='blog_list'),
-    # path('<int:pk>/', views.blog_detail, name='blog_detail'),
-    # path('create/', views.blog_create, name='blog_create'),
-    # path('<int:pk>/update/', views.blog_update, name='blog_update'),
-    # path('<int:pk>/delete/', views.blog_delete, name='blog_delete'),
 
     #auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', member_views.signup, name='signup'),
     path('login/', member_views.login, name='login'),
 
-    #CBV blog
-    path('', cb_views.BlogListView.as_view(), name='blog_list'),
-    path('<int:pk>/', cb_views.BlogDetailView.as_view(), name='blog_detail'),
-    path('create/', cb_views.BlogCreateView.as_view(), name='blog_create'),
-    path('<int:pk>/update', cb_views.BlogUpdateView.as_view(), name='blog_update'),
-    path('<int:pk>/delete', cb_views.BlogDeleteView.as_view(), name='blog_delete'),
+    path('fb/',include('blog.fbv_urls')),
+    path('', include('blog.urls')),
     # path('about/', AboutView.as_view(), name='about'),
     # path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
     # path('test/', TestView.as_view(), name='test'),
