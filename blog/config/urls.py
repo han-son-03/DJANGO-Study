@@ -54,6 +54,7 @@ urlpatterns = [
     #CBV blog
     path('cb/', cb_views.BlogListView.as_view(), name='cb_blog_list'),
     path('cb/<int:pk>/', cb_views.BlogDetailView.as_view(), name='cb_blog_detail'),
+    path('cb/create/', cb_views.BlogCreateView.as_view(), name='cb_blog_create'),
 
     # path('about/', AboutView.as_view(), name='about'),
     # path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
