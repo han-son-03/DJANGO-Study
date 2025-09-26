@@ -21,6 +21,7 @@ from django.views import View
 from django.views.generic import TemplateView, RedirectView
 
 from blog import views
+from blog import cb_views
 from member import views as member_views
 
 
@@ -35,8 +36,10 @@ class TestView(View):
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #FBV blog
     path('', views.blog_list, name='blog_list'),
     path('<int:pk>/', views.blog_detail, name='blog_detail'),
     path('create/', views.blog_create, name='blog_create'),
@@ -48,6 +51,10 @@ urlpatterns = [
     path('signup/', member_views.signup, name='signup'),
     path('login/', member_views.login, name='login'),
 
-    path('about/', AboutView.as_view(), name='about'),
-    path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
+    #CBV blog
+    path('cb/', cb_views.BlogListView.as_view(), name='blog_list'),
+
+    # path('about/', AboutView.as_view(), name='about'),
+    # path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
+    # path('test/', TestView.as_view(), name='test'),
 ]
