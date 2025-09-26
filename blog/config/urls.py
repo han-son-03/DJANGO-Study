@@ -52,7 +52,8 @@ urlpatterns = [
     path('login/', member_views.login, name='login'),
 
     #CBV blog
-    path('cb/', cb_views.BlogListView.as_view(), name='blog_list'),
+    path('cb/', cb_views.BlogListView.as_view(), name='cb_blog_list'),
+    path('cb/<int:pk>/', cb_views.BlogDetailView.as_view(), name='cb_blog_detail'),
 
     # path('about/', AboutView.as_view(), name='about'),
     # path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
