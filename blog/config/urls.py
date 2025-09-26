@@ -40,11 +40,11 @@ class TestView(View):
 urlpatterns = [
     path('admin/', admin.site.urls),
     #FBV blog
-    path('', views.blog_list, name='blog_list'),
-    path('<int:pk>/', views.blog_detail, name='blog_detail'),
-    path('create/', views.blog_create, name='blog_create'),
-    path('<int:pk>/update/', views.blog_update, name='blog_update'),
-    path('<int:pk>/delete/', views.blog_delete, name='blog_delete'),
+    # path('', views.blog_list, name='blog_list'),
+    # path('<int:pk>/', views.blog_detail, name='blog_detail'),
+    # path('create/', views.blog_create, name='blog_create'),
+    # path('<int:pk>/update/', views.blog_update, name='blog_update'),
+    # path('<int:pk>/delete/', views.blog_delete, name='blog_delete'),
 
     #auth
     path('accounts/', include('django.contrib.auth.urls')),
@@ -52,10 +52,11 @@ urlpatterns = [
     path('login/', member_views.login, name='login'),
 
     #CBV blog
-    path('cb/', cb_views.BlogListView.as_view(), name='cb_blog_list'),
-    path('cb/<int:pk>/', cb_views.BlogDetailView.as_view(), name='cb_blog_detail'),
-    path('cb/create/', cb_views.BlogCreateView.as_view(), name='cb_blog_create'),
-    path('cb/<int:pk>/update', cb_views.BlogUpdateView.as_view(), name='cb_blog_update')
+    path('', cb_views.BlogListView.as_view(), name='blog_list'),
+    path('<int:pk>/', cb_views.BlogDetailView.as_view(), name='blog_detail'),
+    path('create/', cb_views.BlogCreateView.as_view(), name='blog_create'),
+    path('<int:pk>/update', cb_views.BlogUpdateView.as_view(), name='blog_update'),
+    path('<int:pk>/delete', cb_views.BlogDeleteView.as_view(), name='blog_delete'),
     # path('about/', AboutView.as_view(), name='about'),
     # path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
     # path('test/', TestView.as_view(), name='test'),

@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template.defaulttags import querystring
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from blog.models import Blog
 
@@ -61,8 +61,8 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
         self.object = blog
         return HttpResponseRedirect(self.get_success_url())
 
-    def get_success_url(self):
-        return reverse_lazy('cb_blog_detail', kwargs={'pk': self.object.pk})
+    # def get_success_url(self):
+    #     return reverse_lazy('cb_blog_detail', kwargs={'pk': self.object.pk})
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
@@ -81,3 +81,12 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 
     # def get_success_url(self):
     #     return reverse_lazy('cb_blog_detail', kwargs={'pk': self.object.pk})
+
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
+    model = Blog
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(author=self.request.user)
+    def get_success_url(self):
+        return reverse_lazy('blog_list')
