@@ -1,3 +1,5 @@
+from unicodedata import category
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -50,7 +52,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     template_name = 'blog_create.html'
-    fields = ('title', 'content')
+    fields = ('category' ,'title', 'content')
     # success_url = reverse_lazy('cb_blog_detail', kwargs={'pk': object.pk})
 
 
@@ -67,7 +69,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     template_name = 'blog_update.html'
-    fields = ('title', 'content')
+    fields = ('category','title', 'content')
 
     def get_queryset(self):
         queryset = super().get_queryset()
