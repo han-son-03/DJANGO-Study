@@ -58,7 +58,7 @@ def blog_create(request):
         blog.save()
         return redirect(reverse('fb:detail', kwargs={'pk': blog.pk}))
     context = {'form' : form,}
-    return render(request, 'blog_create.html', context)
+    return render(request, 'blog_form.html', context)
 
 @login_required()
 def blog_update(request, pk):
@@ -73,7 +73,7 @@ def blog_update(request, pk):
         'blog': blog,
         'form': form,
     }
-    return render(request, 'blog_update.html', context)
+    return render(request, 'blog_form.html', context)
 
 @login_required()
 @require_http_methods(['POST'])
