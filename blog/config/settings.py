@@ -199,14 +199,6 @@ SUMMERNOTE_CONFIG = {
     # Require users to be authenticated for uploading attachments.
     'attachment_require_authentication': True,
 
-    # Set `upload_to` function for attachments.
-
-    # Set custom storage class for attachments.
-    'attachment_storage_class': 'my.custom.storage.class.name',
-
-    # Set custom model for attachments (default: 'django_summernote.Attachment')
-    'attachment_model': 'my.custom.attachment.model', # must inherit 'django_summernote.AbstractAttachment'
-
     # You can completely disable the attachment feature.
     'disable_attachment': False,
 
