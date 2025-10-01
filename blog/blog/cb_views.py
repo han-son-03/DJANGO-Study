@@ -1,15 +1,11 @@
-from unicodedata import category
-
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.template.defaulttags import querystring
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from blog.forms import CommentForm
+from blog.forms import CommentForm, BlogForm
 from blog.models import Blog, Comment
 
 
@@ -36,6 +32,8 @@ class BlogDetailView(ListView):
     # queryset = Blog.objects.all().prefetch_related('comment_set', 'comment_set__author')
     template_name = 'blog_detail.html'
     paginate_by = 10
+
+
     def get(self, request, *args, **kwargs):
         self.object = get_object_or_404(Blog, pk=kwargs.get('blog_pk'))
         return super().get(request, *args, **kwargs)
@@ -84,7 +82,7 @@ class BlogDetailView(ListView):
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     template_name = 'blog_form.html'
-    fields = ('category' ,'title', 'content')
+    form_class = BlogForm
     # success_url = reverse_lazy('cb_blog_detail', kwargs={'pk': object.pk})
 
 
@@ -120,7 +118,9 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     template_name = 'blog_form.html'
-    fields = ('category','title', 'content')
+    # fields = ('category','title', 'content')
+    form_class = BlogForm
+
 
     def get_queryset(self):
         queryset = super().get_queryset()
