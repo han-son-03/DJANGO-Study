@@ -28,11 +28,12 @@
         <div class="text-end">
         <button class="btn btn-primary">작성</button>
         </div>
+    {# 댓글 #}
     </form>
         {% endif %}
-    <div>
-        {% for comment in blog.comment_set.all %}
-            <div>
+    <div class="mb-3" id="comment_wrapper">
+        {% for comment in object_list %}
+            <div class="border-bottom">
                 {{ comment.content }}
             <p class="text-end">
                 <small>{{ comment.created_at | date:'Y-m-d-H:i' }} | {{ comment.author.username }}</small>
@@ -40,7 +41,8 @@
             </div>
         {% endfor %}
     </div>
-    <hr>
+    {% include 'pagination.html' with fragment='comment_wrapper' %}
+
     {# 목록으로 가는 버튼 #}
     <a class="btn btn-sm btn-info" href="{% url 'blog:list' %}">목록</a>
 {% endblock %}
