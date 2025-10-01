@@ -35,7 +35,7 @@ class Blog(TimeStampedModel):
 
     def __str__(self):
         return f'[{self.get_category_display()}] {self.title[:10]}'
-
+    # get_thumbnail_image 썸네일과 이미지를 출력하는 함수 원래는 blog_list에 있었으나 여기에 작성
     def get_thumbnail_image(self):
         if self.thumbnail:
             return self.thumbnail.url
@@ -59,7 +59,7 @@ class Blog(TimeStampedModel):
         thumbnail_name = image_path.stem # /blog/2024/8/13/database.png -> database
         thumbnail_extension = image_path.suffix # /blog/2024/8/13/database.png -> .png
         thumbnail_filename = f'{thumbnail_name}_thumb{thumbnail_extension}'
-
+        #확장자에 맞춰 처리해 주는 알고리즘
         if thumbnail_extension in ['.jpg', 'jpeg']:
             file_type = 'JPEG'
         elif thumbnail_extension == '.gif':
@@ -68,11 +68,11 @@ class Blog(TimeStampedModel):
             file_type = 'PNG'
         else:
             return super().save(*args, **kwargs)
-
+        # BytesIO라는 인메모리에 저장
         temp_thumb = BytesIO()
         image.save(temp_thumb, file_type)
         temp_thumb.seek(0)
-
+        # 장고에 있는 썸네일 필드에 이름과 인메모리 대체를 바로 디비콘 하지 않는다.
         self.thumbnail.save(thumbnail_filename, temp_thumb, save=False)
         temp_thumb.close()
         return super().save(*args, **kwargs)
