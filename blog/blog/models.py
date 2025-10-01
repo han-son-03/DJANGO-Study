@@ -19,6 +19,12 @@ class Blog(TimeStampedModel):
     content = models.TextField('본문')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    image = models.ImageField('이미지', null=True, blank=True, upload_to='blog/%Y/%m/%d')
+    # 2024/4/23일
+    # blog/2024/4/23/이미지파일.jpg
+    # ImageField, FileField 와 같기만 이미지만 업로드하게 되어있다.
+    # varchar => 경로만 저장을 함
+
 
 
     def __str__(self):
