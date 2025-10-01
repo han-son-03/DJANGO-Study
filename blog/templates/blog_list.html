@@ -10,9 +10,17 @@
     {% for blog in object_list %}
         <div class="my-1">
             <a href="{% url 'blog:detail' blog.pk %}" class="link-primary link-offset-2 link-underline-opacity-10 link-underline-opacity-100-hover row">
-                {% if blog.image %}
-                <img src="{{ blog.image.url }}" alt="" class="col-2">
+                {% if blog.thumbnail %}
+                    <img src="{{ blog.thumbnail.url }}" alt="" class="col-2">
                 {% endif %}
+            {# models.py에서 def get_thunbnail_image를 통해 elif 문 생략 가능하짐 #}
+            {# 만약 블로그의 썸네일이 있다면 썸네일을 보여라 #}
+{#                {% if blog.thumbnail %}#}
+{#                    <img src="{{ blog.thumbnail.url }}" alt="" class="col-2">#}
+            {# 만약 블로그의 이미지가 있다면 이미지를 보여라 #}
+{#                {% elif blog.image %}#}
+{#                    <img src="{{ blog.image.url }}" alt="" class="col-2">#}
+{#                {% endif %}#}
                 <span class="col-10">
                      [{{ blog.get_category_display }}]{{ blog.title }} <span> (작성자 : {{ blog.author.username }}) </span>- <small>{{ blog.created_at | date:"Y-m-d"}}</small>
                 </span>

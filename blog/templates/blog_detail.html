@@ -18,8 +18,9 @@
     </div>
     {# 블로그 내용 #}
     <hr>
-    <img src="{{ blog.image.url }}" alt="" class="w-80">
-    
+    {% if blog.image %}
+        <img src="{{ blog.image.url }}" alt="" class="w-80">
+    {% endif %}
     <p>{{ blog.content | safe }}</p>
 
     <hr>
